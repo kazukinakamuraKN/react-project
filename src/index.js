@@ -67,7 +67,7 @@ class Game extends React.Component {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
-    sliceColrow[this.state.stepNumber + 1] = i
+    sliceColrow[this.state.stepNumber + 1] = `[${ Math.floor(i % 3) + 1 },${ Math.floor(i / 3) + 1 }]`;
     this.setState({
       history: history.concat([{
         squares: squares,
