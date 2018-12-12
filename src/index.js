@@ -52,6 +52,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      colrow:  Array(1,2,3,4,5,6,7,8,9),
     };
   }
 
@@ -59,16 +60,21 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+    const colrow = this.state.colrow;
+    const sliceColrow = colrow.slice();
+
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+    sliceColrow[this.state.stepNumber + 1] = i
     this.setState({
       history: history.concat([{
         squares: squares,
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+      colrow: sliceColrow,
     });
   }
 
@@ -84,14 +90,16 @@ class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
+
     const moves = history.map((step, move) => {
       // 参考演算子のif 式 ? trueなら実行 : falseなら実行
       const desc = move ?
         'Go to move #' + move :
         'Go to game start';
+      const colrow = this.state.colrow[move];
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button onClick={() => this.jumpTo(move)}>{desc}{colrow}</button>
         </li>
         );
     });
