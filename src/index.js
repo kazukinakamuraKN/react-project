@@ -98,7 +98,8 @@ class Game extends React.Component {
         'Go to game start';
       const colrow = this.state.colrow[move];
       return (
-        <li key={move}>
+        // style = キャメルケース & {{}}
+        <li key={move} style={{fontWeight: "bold"}}>
           <button onClick={() => this.jumpTo(move)}>{desc}{colrow}</button>
         </li>
         );
