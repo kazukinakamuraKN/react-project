@@ -52,7 +52,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
-      colrow:  Array(1,2,3,4,5,6,7,8,9),
+      colrow:  Array(null,2,3,4,5,6,7,8,9),
     };
   }
 
@@ -95,7 +95,8 @@ class Game extends React.Component {
       const desc = move ?
         'Go to move #' + move :
         'Go to game start';
-      const btnstyle = (step === current) ? 
+      const btnstyle = (this.state.stepNumber === move) ?
+      // step === current　も　可能 stepもcurrentもhistoryの中身、squaresの配列を持ってる
         {fontWeight: "bold"} :
         {fontWeight:  "normal"};
       return (
