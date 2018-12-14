@@ -109,20 +109,18 @@ class Game extends React.Component {
       const desc = move ?
         'Go to move #' + move :
         'Go to game start';
-      const btnstyle = (this.state.stepNumber === move) ?
-      // step === current　も　可能 stepもcurrentもhistoryの中身、squaresの配列を持ってる
-        {fontWeight: "bold"} :
-        {fontWeight: "normal"};
-      const btnfontcolor = this.state.hover ?
-        {color : "red"} :
-        {color : "black"};
+      const nowstyle = () => ({
+        fontWeight: (this.state.stepNumber === move) ? "bold" : "normal",
+        // step === current　も　可能 stepもcurrentもhistoryの中身、squaresの配列を持ってる
+        color: step === current ? this.state.hover ? "red" : "black" : "black"
+      })
       return (
         // style = キャメルケース & {{}}
         <li key={move}>
           <button
             onMouseEnter={() => this.hoverOn()}
             onMouseLeave={() => this.hoverOff()}
-            style={btnstyle, btnfontcolor}
+            style={nowstyle()}
             onClick={() => this.jumpTo(move)}>{desc}{colrow}
           </button>
         </li>
