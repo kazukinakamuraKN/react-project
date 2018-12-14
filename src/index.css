@@ -49,3 +49,11 @@ ol, ul {
   margin-left: 20px;
 }
 
+.target button {
+  transition: color 2s;
+}
+
+.target button:hover {
+  color: #0f0;
+  transition: background-color 800ms;
+}

@@ -112,14 +112,13 @@ class Game extends React.Component {
       const nowstyle = () => ({
         fontWeight: (this.state.stepNumber === move) ? "bold" : "normal",
         // step === current　も　可能 stepもcurrentもhistoryの中身、squaresの配列を持ってる
-        color: step === current ? this.state.hover ? "red" : "black" : "black"
+        // color: step === current ? this.state.hover ? "red" : "black" : "black"
+        // CSSだったーーー
       })
       return (
         // style = キャメルケース & {{}}
-        <li key={move}>
+        <li key={move} className="target" onMouseEnter={() => this.hoverOn()} onMouseLeave={() => this.hoverOff()}>
           <button
-            onMouseEnter={() => this.hoverOn()}
-            onMouseLeave={() => this.hoverOff()}
             style={nowstyle()}
             onClick={() => this.jumpTo(move)}>{desc}{colrow}
           </button>
