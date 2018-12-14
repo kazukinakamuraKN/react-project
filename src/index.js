@@ -53,7 +53,20 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       colrow:  Array(null,2,3,4,5,6,7,8,9),
+      hover: false,
     };
+  }
+
+  hoverOn() {
+    this.setState({
+      hover: true,
+    })
+  }
+
+  hoverOff() { 
+    this.setState({
+      hover: false,
+    })    
   }
 
   handleClick(i) {
@@ -86,6 +99,7 @@ class Game extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
@@ -98,11 +112,19 @@ class Game extends React.Component {
       const btnstyle = (this.state.stepNumber === move) ?
       // step === current　も　可能 stepもcurrentもhistoryの中身、squaresの配列を持ってる
         {fontWeight: "bold"} :
-        {fontWeight:  "normal"};
+        {fontWeight: "normal"};
+      const btnfontcolor = this.state.hover ?
+        {color : "red"} :
+        {color : "black"};
       return (
         // style = キャメルケース & {{}}
         <li key={move}>
-          <button style={btnstyle} onClick={() => this.jumpTo(move)}>{desc}{colrow}</button>
+          <button
+            onMouseEnter={() => this.hoverOn()}
+            onMouseLeave={() => this.hoverOff()}
+            style={btnstyle, btnfontcolor}
+            onClick={() => this.jumpTo(move)}>{desc}{colrow}
+          </button>
         </li>
         );
     });
